@@ -26,10 +26,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<leader>h', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<leader>l', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<leader>j', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<leader>k', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
@@ -50,5 +50,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+-- open terminal
+vim.keymap.set('n', '<leader>ts', ':split | terminal<CR>', { desc = 'Open [T]erminal in horizontally [S]plit window' })
+vim.keymap.set('n', '<leader>tv', ':vsplit | terminal<CR>', { desc = 'Open [T]erminal in [V]ertically split window' })
+vim.keymap.set('n', '<leader>to', ':terminal<CR>', { desc = '[O]pen [T]erminal in current window' })
+
+-- save on ctrl+s
+vim.keymap.set('n', '<C-s>', '<Esc><cmd>w<CR>', { desc = 'Switch to normal mode and save' })
+vim.keymap.set('i', '<C-s>', '<Esc><cmd>w<CR>', { desc = 'Switch to normal mode and save' })
+
+-- next / prev buffer
+vim.keymap.set('n', '<C-b>n', ':bnext<CR>', { desc = 'Switch to next file in buffer' })
+vim.keymap.set('n', '<C-b>p', ':bprev<CR>', { desc = 'Switch to previous file in buffer' })
+
+-- show project tree
+vim.keymap.set('n', '-', vim.cmd.Ex, { desc = 'Show project view / tree' })
+
+-- format files
+-- json:
+vim.keymap.set('n', '<leader>cfj', ':%!jq .<CR>', { desc = 'Run [C]ode [F]ormatting for [J]SON file' })
 
 -- vim: ts=2 sts=2 sw=2 et

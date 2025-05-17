@@ -31,6 +31,22 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        svelte = { 'prettier' },
+        css = { 'prettier' },
+        scss = { 'prettier' },
+        html = { 'prettier' },
+        json = { 'prettier' },
+        yaml = { 'prettier' },
+        yml = { 'prettier' },
+        markdown = { 'prettier' },
+        graphql = { 'prettier' },
+        python = { 'isort', 'black' },
+        cs = { 'csharpier' },
+        csproj = { 'csharpier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -38,6 +54,15 @@ return {
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
+    formatters = {
+      csharpier = {
+        inherit = false,
+        command = 'dotnet',
+        args = { 'csharpier', 'format' },
+        stdin = true,
+      },
+    },
   },
 }
+
 -- vim: ts=2 sts=2 sw=2 et

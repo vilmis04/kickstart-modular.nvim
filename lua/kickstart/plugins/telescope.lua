@@ -72,6 +72,24 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
+      local function delete_current_buffer(shouldCloseWindow)
+        local current_bufnr = vim.api.nvim_get_current_buf()
+        local bufname = vim.api.nvim_buf_get_name(current_bufnr)
+        vim.cmd 'silent! bprevious'
+        if string.sub(bufname, 1, 7) == 'term://' then
+          vim.api.nvim_buf_delete(current_bufnr, { force = true })
+        else
+          vim.api.nvim_buf_delete(current_bufnr, {})
+        end
+        if #vim.api.nvim_list_wins() > 1 and shouldCloseWindow then
+          vim.api.nvim_win_close(0, false)
+        end
+      end
+
+      local function delete_buff_and_close()
+        delete_current_buffer(true)
+      end
+
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -83,7 +101,15 @@ return {
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader><leader>', function()
+        builtin.buffers {
+          sort_lastused = true,
+          ignore_current_buffer = true,
+        }
+      end, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>bd', delete_current_buffer, { desc = 'Delete current buffer' })
+      vim.keymap.set('n', '<leader>bq', delete_buff_and_close, { desc = 'Delete current buffer' })
+      vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = '[S]earch [G]it files' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -110,4 +136,5 @@ return {
     end,
   },
 }
+
 -- vim: ts=2 sts=2 sw=2 et
