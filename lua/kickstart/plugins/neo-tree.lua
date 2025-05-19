@@ -13,6 +13,7 @@ return {
   keys = {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
     { '<leader><leader>', ':Neotree float buffers<CR>', desc = 'NeoTree open buffer list', silent = true },
+    { '<leader>gs', ':Neotree float git_status<CR>', desc = 'NeoTree open [g]it [s]tatus', silent = true },
   },
   opts = {
     filesystem = {
@@ -52,6 +53,12 @@ return {
         position = 'float',
         mappings = {
           ['\\'] = 'close_window',
+          ['e'] = function()
+            vim.api.nvim_exec2('Neotree focus filesystem float', { output = true })
+          end,
+          ['b'] = function()
+            vim.api.nvim_exec2('Neotree focus buffers float', { output = true })
+          end,
         },
       },
     },
