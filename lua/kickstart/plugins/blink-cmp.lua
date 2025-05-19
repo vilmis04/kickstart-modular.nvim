@@ -58,9 +58,16 @@ return {
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
-        ['<Tab>'] = { 'select_and_accept' },
-        ['<CR>'] = { 'select_and_accept' },
-
+        -- ['<Tab>'] = { 'select_accept_and_enter' },
+        -- ['<CR>'] = { 'select_accept_and_enter' },
+        ['<CR>'] = {
+          function(cmp)
+            if cmp.is_visible() then
+              cmp.select_and_accept()
+            else
+            end
+          end,
+        },
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },

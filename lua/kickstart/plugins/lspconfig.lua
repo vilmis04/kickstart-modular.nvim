@@ -1,4 +1,14 @@
 -- LSP Plugins
+-- local create_nmap = function(bufnr)
+--   return function(mode, keys, func, desc)
+--     if desc then
+--       desc = 'LSP: ' .. desc
+--     end
+--
+--     vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
+--   end
+-- end
+
 return {
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -31,6 +41,21 @@ return {
       'saghen/blink.cmp',
     },
     config = function()
+      -- local lsp_config = require 'lspconfig'
+      -- local omnisharp_extended = require 'omnisharp_extended'
+      --
+      -- lsp_config.omnisharp.setup {
+      --   cmd = { 'omnisharp' },
+      --   on_attach = function(client, bufnr)
+      --     local nmap = create_nmap(bufnr)
+      --     nmap('n', 'gd', omnisharp_extended.lsp_definition, '[G]oto [D]efinition')
+      --     nmap('n', 'gd', omnisharp_extended.lsp_definition, '[G]oto [D]efinition')
+      --     nmap('n', 'gr', omnisharp_extended.lsp_references, '[G]oto [R]eferences')
+      --     nmap('n', 'gi', omnisharp_extended.lsp_implementation, '[G]oto [I]mplementation')
+      --     nmap('n', '<leader>D', omnisharp_extended.lsp_type_definition, 'Type [D]efinition')
+      --   end,
+      -- }
+
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -188,6 +213,7 @@ return {
       local servers = {
         ts_ls = {},
         omnisharp = {},
+        -- csharp_ls = {},
         eslint = {},
         bashls = {},
         angularls = {},
@@ -244,12 +270,14 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'omnisharp',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
+        automatic_enable = true,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}

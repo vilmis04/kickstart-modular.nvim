@@ -11,6 +11,7 @@
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
@@ -33,7 +34,8 @@ require('lazy').setup({
 
   require 'kickstart/plugins/conform',
 
-  require 'kickstart/plugins/blink-cmp',
+  -- require 'kickstart/plugins/blink-cmp',
+  require 'kickstart/plugins/nvim-cmp',
 
   -- require 'kickstart/plugins/tokyonight',
   require 'kickstart/plugins/catppuccin',
@@ -59,7 +61,7 @@ require('lazy').setup({
   --
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
-  require 'kickstart.plugins.lint',
+  -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
 

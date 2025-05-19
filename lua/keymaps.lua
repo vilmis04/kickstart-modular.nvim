@@ -7,6 +7,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic [E]rror message context menu' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -55,6 +58,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.keymap.set('n', '<leader>ts', ':split | terminal<CR>', { desc = 'Open [T]erminal in horizontally [S]plit window' })
 vim.keymap.set('n', '<leader>tv', ':vsplit | terminal<CR>', { desc = 'Open [T]erminal in [V]ertically split window' })
 vim.keymap.set('n', '<leader>to', ':terminal<CR>', { desc = '[O]pen [T]erminal in current window' })
+
+-- window management
+vim.keymap.set('n', '<leader>ws', ':split<CR>', { desc = 'Open [W]indow in horizontal [S]plit' })
+vim.keymap.set('n', '<leader>wv', ':vsplit<CR>', { desc = 'Open [W]indow in [V]ertical split' })
 
 -- save on ctrl+s
 vim.keymap.set('n', '<C-s>', '<Esc><cmd>w<CR>', { desc = 'Switch to normal mode and save' })
