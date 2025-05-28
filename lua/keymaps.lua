@@ -54,6 +54,33 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+function ToggleOrCreateTerminal()
+  local term_buf = nil
+  -- Iterate over all listed buffers
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    -- Check if the buffer is loaded and if it's a terminal buffer
+    if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].buftype == 'terminal' then
+      term_buf = bufnr
+      break
+    end
+  end
+
+  if term_buf then
+    -- If a terminal buffer exists, switch to it
+    vim.api.nvim_set_current_buf(term_buf)
+  else
+    vim.cmd 'term'
+    -- You could also use :term, :vnew | term, :tabnew | term etc.
+    -- For example, to open in a vertical split:
+    -- vim.cmd('vnew | terminal')
+    -- To open in a new tab:
+    -- vim.cmd('tabnew | terminal')
+  end
+end
+
+-- Map the function to <C-`>
+vim.keymap.set('n', '<leader>0', ToggleOrCreateTerminal, { noremap = true, silent = true, desc = 'Toggle/Open Terminal' })
+
 -- open terminal
 vim.keymap.set('n', '<leader>ts', ':split | terminal<CR>', { desc = 'Open [T]erminal in horizontally [S]plit window' })
 vim.keymap.set('n', '<leader>tv', ':vsplit | terminal<CR>', { desc = 'Open [T]erminal in [V]ertically split window' })
