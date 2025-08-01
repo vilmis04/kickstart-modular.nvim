@@ -1,5 +1,6 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+vim.keymap.set('n', '<C-D>', ':e ++ff=dos<CR>', { desc = 'Switch fileformat to [d]os' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
