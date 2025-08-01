@@ -83,8 +83,8 @@ end
 vim.keymap.set('n', '<leader>0', ToggleOrCreateTerminal, { noremap = true, silent = true, desc = 'Toggle/Open Terminal' })
 
 -- open terminal
-vim.keymap.set('n', '<leader>ts', ':split | terminal<CR>', { desc = 'Open [T]erminal in horizontally [S]plit window' })
-vim.keymap.set('n', '<leader>tv', ':vsplit | terminal<CR>', { desc = 'Open [T]erminal in [V]ertically split window' })
+vim.keymap.set('n', '<leader>ts', ':split | resize 15 | terminal<CR>', { desc = 'Open [T]erminal in horizontally [S]plit window' })
+vim.keymap.set('n', '<leader>tv', ':vsplit | vertical resize 80 | terminal<CR>', { desc = 'Open [T]erminal in [V]ertically split window' })
 vim.keymap.set('n', '<leader>to', ':terminal<CR>', { desc = '[O]pen [T]erminal in current window' })
 
 -- window management
