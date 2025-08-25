@@ -116,7 +116,7 @@ return {
       end, { desc = '[ ] show existing [b]uffers that are [o]pen' })
       vim.keymap.set('n', '<leader>bd', delete_current_buffer, { desc = 'Delete current buffer' })
       vim.keymap.set('n', '<leader>bq', delete_buff_and_close, { desc = 'Delete current buffer' })
-      vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = '[S]earch [G]it files' })
+      vim.keymap.set('n', '<leader>p', builtin.git_files, { desc = '[S]earch [G]it files' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
