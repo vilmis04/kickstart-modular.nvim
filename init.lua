@@ -1,3 +1,7 @@
+vim.opt.shell = 'C:\\Users\\S1907H\\AppData\\Local\\Programs\\Git\\bin\\bash.exe'
+vim.opt.fileformats = 'dos,unix,mac'
+vim.opt.fileformat = 'dos'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
