@@ -6,6 +6,8 @@
 vim.o.number = true
 vim.o.relativenumber = true
 
+vim.opt.swapfile = false
+
 vim.o.mouse = 'a'
 
 vim.o.fileformat = 'unix'
